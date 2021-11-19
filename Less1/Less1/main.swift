@@ -44,3 +44,21 @@ let gipotenuza=sqrt(catetADouble * catetADouble + catetBDouble * catetBDouble)
 let perimetr=catetADouble + catetBDouble + gipotenuza
 print("периметр треугольника " + String(perimetr) )
 print("гипотенуза треугольника " + String(gipotenuza))
+
+//Задание 3
+print("по введенной сумма вклада и проценту рассчитать сумму вклада через 5 лет")
+print("Введите сумму вклада")
+let summ=readLine()
+print("введите процент")
+let procent=readLine()
+let summstr=summ ?? "не введена сумма"
+let procentstr=procent ?? "не введен процент"
+let summDouble=Double(summstr) ?? 10
+let procentDouble=Double(procentstr) ?? 10
+let itog1year=summDouble * (1+procentDouble/100)
+let itog2year=itog1year * (1+procentDouble/100)
+let itog3year=itog2year * (1+procentDouble/100)
+let itog4year=itog3year * (1+procentDouble/100)
+let itog5year=itog4year * (1+procentDouble/100)
+print("сумма вклада через 5 лет составит "+String(itog5year))
+
