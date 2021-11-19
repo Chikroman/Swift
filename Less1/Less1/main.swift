@@ -27,6 +27,7 @@ let x1=(-factorBDouble-sqrt(abs(diskriminant))) / (2 * factorADouble)
 let x2=(-factorBDouble+sqrt(abs(diskriminant))) / (2 * factorADouble)
 print(x1)
 print(x2)
+<<<<<<< HEAD
 
 //Задание 2
 print("по введенным катетам найти S P и гипотенузу")
@@ -44,3 +45,5 @@ let gipotenuza=sqrt(catetADouble * catetADouble + catetBDouble * catetBDouble)
 let perimetr=catetADouble + catetBDouble + gipotenuza
 print("периметр треугольника " + String(perimetr) )
 print("гипотенуза треугольника " + String(gipotenuza))
+=======
+>>>>>>> main
