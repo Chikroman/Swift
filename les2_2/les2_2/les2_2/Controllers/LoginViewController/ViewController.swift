@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         guard let login = loginTextField.text, let password = passwordTextField.text else { return}
         if login == "admin", password == "qwerty"{
             print("good")
+            performSegue(withIdentifier: "fromLoginTabbar", sender: nil)
         }else {
             print("bad")}
         
