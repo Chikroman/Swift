@@ -1,20 +1,23 @@
 //
-//  GroupsController.swift
+//  GroupController.swift
 //  les2_2
 //
-//  Created by Роман Чикишев on 11.01.2022.
+//  Created by Роман Чикишев on 13.01.2022.
 //
 
 import UIKit
 
-class GroupsController: UIViewController {
+class GroupController: UIViewController {
 
-    
     @IBOutlet weak var tableViewMyGroups: UITableView!
     
     let reuseIdentifierUniversalTableViewCell = "reuseIdentifierUniversalTableViewCell"
     
-    let MyGroups = ["Pervaya","Vtoraya","Tretiya"]
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableViewMyGroups.reloadData()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

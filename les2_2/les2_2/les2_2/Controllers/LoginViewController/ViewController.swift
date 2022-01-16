@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fillFriendsData()
+        fillGroupData()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
         let recongizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
@@ -42,12 +44,24 @@ class ViewController: UIViewController {
     }
     @IBAction func loginButtonPressed(_ sender: Any) {
         guard let login = loginTextField.text, let password = passwordTextField.text else { return}
-        if login == "admin", password == "qwerty"{
-            print("good")
+//        if login == "admin", password == "qwerty"{
+//            print("good")
             performSegue(withIdentifier: "fromLoginTabbar", sender: nil)
-        }else {
-            print("bad")}
+//        }else {
+//            print("bad")}
         
+    }
+    func fillFriendsData() {
+        let friends1 = Friend(name: "Des", avatar: "Des1", fotos: ["Des1","Des2"])
+        let friends2 = Friend(name: "Sidor", avatar: "Sidor1", fotos: ["Sidor1","Sidor2"])
+        Storage.share.myFriends.append(friends1)
+        Storage.share.myFriends.append(friends2)
+    }
+    func fillGroupData() {
+        let groups1 = Group(name: "Клуб любителей пива", avatar: "beer1", description: "Любители пива")
+        let groups2 = Group(name: "Клуб любителей шашлыка", avatar: "shashlik1", description: "Любители шашлыка")
+        Storage.share.allGroups.append(groups1)
+        Storage.share.allGroups.append(groups2)
     }
 }
 
