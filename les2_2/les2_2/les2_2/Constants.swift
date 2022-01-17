@@ -7,4 +7,4 @@
 
 import CoreGraphics
 
-let heightForCellTableView: CGFloat = 140
+let heightForCellTableView: CGFloat = 200

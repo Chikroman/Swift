@@ -23,6 +23,12 @@ class UniversalTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        mainImageView.layer.cornerRadius = 43
+        mainImageView.layer.borderWidth = 5
+        mainImageView.layer.shadowColor = UIColor.black.cgColor
+        mainImageView.layer.shadowOffset = CGSize(width: 40, height: 40)
+        mainImageView.layer.shadowRadius = 15
+        mainImageView.layer.shadowOpacity = 0.8
         // Initialization code
     }
     func configurate(image: UIImage?, name: String?, description: String?){

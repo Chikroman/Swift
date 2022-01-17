@@ -19,5 +19,5 @@ extension AllGroupController: UITableViewDelegate{
     }
 //    func isAllreadyMyGroups(item: Int) -> Bool {
 //        return  Storage.share.myGroups.contains { myGroupsItem in myGroupsItem == Storage.share.allGroups[item]}
-//    }
+//    } 
 }
