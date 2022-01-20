@@ -44,8 +44,9 @@ extension GalleryController: UICollectionViewDataSource {
 extension GalleryController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let heightButtonHearControll:CGFloat = 50
         let width = collectionView.bounds.width / 3 - 30
-        return CGSize(width: width, height: width)
+        return CGSize(width: width, height: width + heightButtonHearControll)
     }
 }
 

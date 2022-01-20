@@ -26,6 +26,8 @@
 		1F6D52BD27947F04008CDE4F /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D52BB27947F04008CDE4F /* GalleryCell.swift */; };
 		1F6D52BE27947F04008CDE4F /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6D52BC27947F04008CDE4F /* GalleryCell.xib */; };
 		1F6D52C1279487E6008CDE4F /* FotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D52C0279487E6008CDE4F /* FotoViewController.swift */; };
+		1F98F02927986F470013DD74 /* LikeCounterControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F98F02827986F470013DD74 /* LikeCounterControlView.swift */; };
+		1F98F02C27986F830013DD74 /* LikeCounterControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F98F02B27986F830013DD74 /* LikeCounterControlView.xib */; };
 		1FB8EF212779D294006478AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8EF202779D294006478AE /* AppDelegate.swift */; };
 		1FB8EF232779D294006478AE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8EF222779D294006478AE /* SceneDelegate.swift */; };
 		1FB8EF252779D294006478AE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB8EF242779D294006478AE /* ViewController.swift */; };
@@ -74,6 +76,8 @@
 		1F6D52BB27947F04008CDE4F /* GalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
 		1F6D52BC27947F04008CDE4F /* GalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		1F6D52C0279487E6008CDE4F /* FotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FotoViewController.swift; sourceTree = "<group>"; };
+		1F98F02827986F470013DD74 /* LikeCounterControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCounterControlView.swift; sourceTree = "<group>"; };
+		1F98F02B27986F830013DD74 /* LikeCounterControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LikeCounterControlView.xib; sourceTree = "<group>"; };
 		1FB8EF1D2779D294006478AE /* les2_2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = les2_2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FB8EF202779D294006478AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FB8EF222779D294006478AE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +213,15 @@
 			path = FotoViewController;
 			sourceTree = "<group>";
 		};
+		1F98F02A27986F700013DD74 /* LikeCounterControlView */ = {
+			isa = PBXGroup;
+			children = (
+				1F98F02827986F470013DD74 /* LikeCounterControlView.swift */,
+				1F98F02B27986F830013DD74 /* LikeCounterControlView.xib */,
+			);
+			path = LikeCounterControlView;
+			sourceTree = "<group>";
+		};
 		1FB8EF142779D294006478AE = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +256,7 @@
 				1FB8EF2E2779D294006478AE /* Info.plist */,
 				1F6D52A0279043A5008CDE4F /* Constants.swift */,
 				1F6D52AE279079DD008CDE4F /* Storage.swift */,
+				1F98F02A27986F700013DD74 /* LikeCounterControlView */,
 			);
 			path = les2_2;
 			sourceTree = "<group>";
@@ -368,6 +382,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F98F02C27986F830013DD74 /* LikeCounterControlView.xib in Resources */,
 				1F6D52BE27947F04008CDE4F /* GalleryCell.xib in Resources */,
 				1FB8EF2D2779D294006478AE /* LaunchScreen.storyboard in Resources */,
 				1FB8EF2A2779D294006478AE /* Assets.xcassets in Resources */,
@@ -400,6 +415,7 @@
 				1FB8EF252779D294006478AE /* ViewController.swift in Sources */,
 				1F6D52B427907E09008CDE4F /* AllGroupsController+TableSourse.swift in Sources */,
 				1F6D52AF279079DD008CDE4F /* Storage.swift in Sources */,
+				1F98F02927986F470013DD74 /* LikeCounterControlView.swift in Sources */,
 				1F6D529627903FB9008CDE4F /* FriendsListController.swift in Sources */,
 				1F6D52A427904656008CDE4F /* GroupController.swift in Sources */,
 				1F6D52B627907E3A008CDE4F /* AllGroupsController+TableDelegate.swift in Sources */,
