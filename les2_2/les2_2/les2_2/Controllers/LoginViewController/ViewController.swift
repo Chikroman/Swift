@@ -16,6 +16,34 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var firstRedView: UIView!
+    @IBOutlet weak var secondRedView: UIView!
+    @IBOutlet weak var thirdRedView: UIView!
+    
+    func animateDownLoadsView(exitAfter: Int , currentAfter: Int = 0) {
+        UIView.animate(withDuration: 3) {[weak self] in
+            self?.firstRedView.alpha = 0
+            self?.secondRedView.alpha = 1
+        } completion: { _ in
+            UIView.animate(withDuration: 3) {[weak self] in
+                self?.secondRedView.alpha = 0
+                self?.thirdRedView.alpha = 1
+            } completion: { _ in
+                UIView.animate(withDuration: 3) {[weak self] in
+                    self?.thirdRedView.alpha = 0
+                    self?.firstRedView.alpha = 1
+                } completion: { [weak self] _ in
+                    if exitAfter > currentAfter {
+                        self?.animateDownLoadsView(exitAfter: exitAfter, currentAfter: currentAfter+1)
+                    }
+                    else {
+                        return
+                    }
+                }
+            }
+        }
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         fillFriendsData()
@@ -25,6 +53,8 @@ class ViewController: UIViewController {
         let recongizer = UITapGestureRecognizer(target: self, action: #selector(onTap))
         recongizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(recongizer)
+        self.secondRedView.alpha = 0
+        self.thirdRedView.alpha = 0
     }
     
     @objc func keyboardDidShow(_ notificatoin: Notification) {
@@ -43,6 +73,7 @@ class ViewController: UIViewController {
         
     }
     @IBAction func loginButtonPressed(_ sender: Any) {
+        animateDownLoadsView(exitAfter: 200)
         guard let login = loginTextField.text, let password = passwordTextField.text else { return}
 //        if login == "admin", password == "qwerty"{
 //            print("good")

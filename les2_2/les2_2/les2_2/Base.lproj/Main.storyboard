@@ -55,21 +55,60 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhQ-Uz-P1l">
+                                                <rect key="frame" x="39" y="519" width="40" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D7Y-x2-ZpQ">
+                                                <rect key="frame" x="105" y="519" width="40" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JOL-Ca-woW">
+                                                <rect key="frame" x="167" y="519" width="40" height="40"/>
+                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="ZhQ-Uz-P1l" firstAttribute="top" secondItem="tLz-ZU-RMv" secondAttribute="top" constant="519" id="1NS-UK-Stw"/>
                                             <constraint firstItem="LBY-YV-1gm" firstAttribute="top" secondItem="tLz-ZU-RMv" secondAttribute="top" constant="245" id="1S4-FK-jPp"/>
+                                            <constraint firstAttribute="trailing" secondItem="JOL-Ca-woW" secondAttribute="trailing" constant="207" id="20D-gG-w7M"/>
+                                            <constraint firstItem="JOL-Ca-woW" firstAttribute="leading" secondItem="D7Y-x2-ZpQ" secondAttribute="trailing" constant="26" id="2cz-GB-yze"/>
+                                            <constraint firstItem="D7Y-x2-ZpQ" firstAttribute="top" secondItem="tLz-ZU-RMv" secondAttribute="top" constant="519" id="2hx-bV-fn3"/>
+                                            <constraint firstItem="ZhQ-Uz-P1l" firstAttribute="leading" secondItem="tLz-ZU-RMv" secondAttribute="leading" constant="39" id="7Hk-n9-LSy"/>
                                             <constraint firstItem="w0t-Xf-qyi" firstAttribute="leading" secondItem="tLz-ZU-RMv" secondAttribute="leading" constant="45" id="AGU-4U-3SN"/>
                                             <constraint firstItem="TWk-rO-jsy" firstAttribute="top" secondItem="U03-2O-JNh" secondAttribute="bottom" constant="50" id="ALv-59-VOQ"/>
+                                            <constraint firstItem="JOL-Ca-woW" firstAttribute="top" secondItem="tLz-ZU-RMv" secondAttribute="top" constant="519" id="ASH-fh-GXk"/>
+                                            <constraint firstItem="D7Y-x2-ZpQ" firstAttribute="leading" secondItem="ZhQ-Uz-P1l" secondAttribute="trailing" constant="26" id="CXy-FZ-oiI"/>
                                             <constraint firstItem="TWk-rO-jsy" firstAttribute="leading" secondItem="tLz-ZU-RMv" secondAttribute="leading" constant="126" id="Cwf-VO-O5B"/>
                                             <constraint firstItem="6DY-vL-DlT" firstAttribute="leading" secondItem="tLz-ZU-RMv" secondAttribute="leading" constant="33" id="Fdh-uy-T5S"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZhQ-Uz-P1l" secondAttribute="trailing" constant="335" id="K4H-Gn-O2X"/>
                                             <constraint firstItem="U03-2O-JNh" firstAttribute="trailing" secondItem="6DY-vL-DlT" secondAttribute="trailing" id="OF1-2C-V7d"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZhQ-Uz-P1l" secondAttribute="bottom" constant="259" id="X3O-y0-XTo"/>
                                             <constraint firstAttribute="trailing" secondItem="6DY-vL-DlT" secondAttribute="trailing" constant="10" id="dIs-bE-h15"/>
                                             <constraint firstItem="U03-2O-JNh" firstAttribute="top" secondItem="tLz-ZU-RMv" secondAttribute="top" constant="364" id="fKc-hN-xqG"/>
+                                            <constraint firstAttribute="bottom" secondItem="JOL-Ca-woW" secondAttribute="bottom" constant="259" id="goP-31-hhx"/>
                                             <constraint firstItem="6DY-vL-DlT" firstAttribute="top" secondItem="LBY-YV-1gm" secondAttribute="bottom" constant="8" symbolic="YES" id="jEC-Po-UfD"/>
                                             <constraint firstItem="LBY-YV-1gm" firstAttribute="leading" secondItem="tLz-ZU-RMv" secondAttribute="leading" constant="45" id="n3d-Xa-4VX"/>
                                             <constraint firstItem="U03-2O-JNh" firstAttribute="leading" secondItem="tLz-ZU-RMv" secondAttribute="leading" constant="39" id="o5h-sT-EYp"/>
+                                            <constraint firstAttribute="bottom" secondItem="D7Y-x2-ZpQ" secondAttribute="bottom" constant="259" id="obd-ru-mbA"/>
                                             <constraint firstItem="U03-2O-JNh" firstAttribute="top" secondItem="w0t-Xf-qyi" secondAttribute="bottom" constant="6" id="v0z-Hd-TpX"/>
+                                            <constraint firstAttribute="trailing" secondItem="D7Y-x2-ZpQ" secondAttribute="trailing" constant="273" id="y8a-5N-iCJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -97,10 +136,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="firstRedView" destination="ZhQ-Uz-P1l" id="Utw-ul-QvF"/>
                         <outlet property="loginButtom" destination="TWk-rO-jsy" id="xk5-Lt-mL6"/>
                         <outlet property="loginTextField" destination="6DY-vL-DlT" id="Izn-xc-b8f"/>
                         <outlet property="passwordTextField" destination="U03-2O-JNh" id="EOm-Yi-nor"/>
                         <outlet property="scrollView" destination="7jd-ux-gHN" id="quN-nf-n3g"/>
+                        <outlet property="secondRedView" destination="D7Y-x2-ZpQ" id="pHh-AZ-vpP"/>
+                        <outlet property="thirdRedView" destination="JOL-Ca-woW" id="23F-Nw-3uc"/>
                         <segue destination="ogh-QH-npb" kind="presentation" identifier="fromLoginTabbar" modalPresentationStyle="fullScreen" id="3AK-tf-cFn"/>
                     </connections>
                 </viewController>
@@ -328,6 +370,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

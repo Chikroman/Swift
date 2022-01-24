@@ -42,16 +42,35 @@ import UIKit
 
     @IBAction func pressHeartButton(_ sender: Any) {
         if isHeartEmpty {
-            likeCounter += 1
+            self.likeCounter += 1
+            UIView.transition(with: countLabel,
+                              duration: 1,
+                              options: [.transitionFlipFromTop]) {[weak self] in
+                guard let self = self else {return}
+                self.countLabel.text = String(self.likeCounter)
+            } completion: { _ in
+                
+            }
+
+            
             heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             
             
         }
         else {
             likeCounter -= 1
+            UIView.transition(with: countLabel,
+                              duration: 1,
+                              options: [.transitionFlipFromTop]) {[weak self] in
+                guard let self = self else {return}
+                self.countLabel.text = String(self.likeCounter)
+            } completion: { _ in
+                
+            }
+
             heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-        countLabel.text = String(likeCounter)
+        
         isHeartEmpty = !isHeartEmpty
     }
 }

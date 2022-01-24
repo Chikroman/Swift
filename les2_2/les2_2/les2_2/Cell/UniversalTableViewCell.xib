@@ -36,16 +36,29 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Grw-Ml-tju">
+                        <rect key="frame" x="0.0" y="0.0" width="143.5" height="99"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain"/>
+                        <connections>
+                            <action selector="pressAnimationButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="JY2-Qf-gie"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Grw-Ml-tju" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0Y3-cA-dim"/>
                     <constraint firstItem="hnD-5e-b1h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="0gp-lM-Kea"/>
                     <constraint firstAttribute="centerY" secondItem="mPC-Q3-5AK" secondAttribute="bottom" id="1NQ-4A-ISR"/>
                     <constraint firstAttribute="trailing" secondItem="wEh-Sp-vmG" secondAttribute="trailing" constant="8" id="6lJ-VT-Z64"/>
                     <constraint firstItem="wEh-Sp-vmG" firstAttribute="leading" secondItem="hnD-5e-b1h" secondAttribute="trailing" constant="4" id="Qfi-Mf-1Ci"/>
                     <constraint firstItem="mPC-Q3-5AK" firstAttribute="leading" secondItem="hnD-5e-b1h" secondAttribute="trailing" constant="8" id="XZ5-Bu-u8X"/>
+                    <constraint firstAttribute="bottom" secondItem="Grw-Ml-tju" secondAttribute="bottom" id="YKR-jp-JeD"/>
+                    <constraint firstAttribute="trailing" secondItem="Grw-Ml-tju" secondAttribute="trailing" id="gvE-jo-WDl"/>
                     <constraint firstAttribute="trailing" secondItem="hnD-5e-b1h" secondAttribute="trailing" constant="240" id="lC0-wg-vrt"/>
                     <constraint firstItem="hnD-5e-b1h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="nhm-ES-K3H"/>
                     <constraint firstAttribute="trailing" secondItem="mPC-Q3-5AK" secondAttribute="trailing" constant="4" id="wvh-VU-SM8"/>
+                    <constraint firstItem="Grw-Ml-tju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xeM-Od-Gcl"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

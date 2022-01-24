@@ -16,12 +16,14 @@ extension FriendsListController: UITableViewDelegate{
            let destinationController = segue.destination as? GalleryController,
            let friend = sender as? Friend {
             destinationController.fotoArray = friend.fotos
+            
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print (friends[indexPath.row])
-        performSegue(withIdentifier: fromMyFriendToGallery, sender: friends[indexPath.row])
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print (friends[indexPath.row])
+//        
+//        performSegue(withIdentifier: fromMyFriendToGallery, sender: friends[indexPath.row])
+//    }
 }
 

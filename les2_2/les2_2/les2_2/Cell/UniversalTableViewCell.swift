@@ -14,10 +14,13 @@ class UniversalTableViewCell: UITableViewCell {
     
     @IBOutlet weak var descriptoinLableView: UILabel!
     
+    var completion: (()->Void)?
+    
     override func prepareForReuse() {
         mainImageView.image = nil
         nameLableView.text = nil
         descriptoinLableView.text = nil
+        self.completion = nil
         
     }
 
@@ -36,7 +39,8 @@ class UniversalTableViewCell: UITableViewCell {
         nameLableView.text = name
         descriptoinLableView.text = description
     }
-    func configurate(friend: Friend){
+    func configurate(friend: Friend, completion: @escaping()->Void){
+        self.completion = completion
         mainImageView.image = UIImage(named: friend.avatar)
         nameLableView.text = friend.name
         descriptoinLableView.text = ""
@@ -45,5 +49,14 @@ class UniversalTableViewCell: UITableViewCell {
         mainImageView.image = UIImage(named: group.avatar)
         nameLableView.text = group.name
         descriptoinLableView.text = group.description
+    }
+    
+    @IBAction func pressAnimationButton(_ sender: Any) {
+        UIView.animate(withDuration: 3) {[weak self] in
+            self?.mainImageView.frame = CGRect.zero
+        } completion: {[weak self] _ in
+            self?.completion?()
+        }
+
     }
 }
