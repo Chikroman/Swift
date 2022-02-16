@@ -15,4 +15,6 @@ class Storage: NSObject {
     var allGroups = [Group]()
     var myGroups = [Group]()
     var myFriends = [Friend]()
+    let token: String = ""
+    let uerId: Int = 0
 }
