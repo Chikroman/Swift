@@ -6,17 +6,21 @@
 //
 
 import UIKit
-
+enum ServiceError: Error {
+    case parseError
+    case serverError
+}
 class FriendsListController: UIViewController {
 
     @IBOutlet weak var tableViewMyFriends: UITableView!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var sourceFriends = Storage.share.myFriends
-    var friends = [Friend]()
+
+    var friends = [Friends]()
     let reuseIdentifierUniversalTableViewCell = "reuseIdentifierUniversalTableViewCell"
     let fromMyFriendToGallery = "fromMyFriendToGallery"
+
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -24,8 +28,45 @@ class FriendsListController: UIViewController {
             tableViewMyFriends.delegate = self
             tableViewMyFriends.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
 //            searchBar.delegate = self
-            friends = sourceFriends
+//            friends = sourceFriends
+            fetchFriends()
         }
+    
+    func loadFriends(completion: @escaping(Result<Friend, ServiceError>) -> ()){
+        let queryItemsFrends = [
+            URLQueryItem(name: "access_token", value: Storage.share.token),
+            URLQueryItem(name: "fields", value: "photo_50"),
+            URLQueryItem(name: "v", value: "5.81")]
+        UniversalMetod().loadJson(path: "/method/friends.get", queryItems: queryItemsFrends)
+            let jsonDecoder = JSONDecoder()
+
+            do {
+                let result = try jsonDecoder.decode(Friend.self, from: Storage.share.datafile as! Data)
+                
+                return completion(.success(result))
+            } catch {
+                completion(.failure(.parseError))
+            }
+
+    }
+}
+
+private extension FriendsListController {
+    func fetchFriends() {
+        loadFriends { [weak self] friends in
+            guard let self = self else { return }
+            do {
+                let arrayFriend = try friends.get().response.items
+                self.friends = arrayFriend
+            }
+            catch { }
+            DispatchQueue.main.async {
+                self.tableViewMyFriends.reloadData()
+            }
+        }
+    }
+
+
 }
 
 //extension FriendsListController: UISearchBarDelegate {
@@ -41,3 +82,4 @@ class FriendsListController: UIViewController {
 //        tableViewMyFriends.reloadData()
 //    }
 //}
+

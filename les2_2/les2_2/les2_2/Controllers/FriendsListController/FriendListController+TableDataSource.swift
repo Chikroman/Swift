@@ -18,10 +18,10 @@ extension FriendsListController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUniversalTableViewCell, for: indexPath) as? UniversalTableViewCell else {return UITableViewCell()}
         
 //        cell.configurate(image: nil, name: friends[indexPath.row], description: nil)
-        cell.configurate(friend: friends[indexPath.row], completion: {[weak self] in
-            guard let self = self else {return}
-            self.performSegue(withIdentifier: self.fromMyFriendToGallery, sender: self.friends[indexPath.row])
-        })
+//        cell.configurate(friend: friends[indexPath.row], completion: {[weak self] in
+//            guard let self = self else {return}
+//            self.performSegue(withIdentifier: self.fromMyFriendToGallery, sender: self.friends[indexPath.row])
+//        })
         return cell
     }
 }

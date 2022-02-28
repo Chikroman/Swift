@@ -8,6 +8,8 @@
 import UIKit
 
 class GroupController: UIViewController {
+    var groups: [Groups] = []
+   
 
     @IBOutlet weak var tableViewMyGroups: UITableView!
     
@@ -24,7 +26,38 @@ class GroupController: UIViewController {
         tableViewMyGroups.dataSource = self
         tableViewMyGroups.delegate = self
         tableViewMyGroups.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
+        fetchGroups()
     }
+    private let jsonDecoder = JSONDecoder()
+    
+    func loadGroups(completion: @escaping(Result<Group, ServiceError>) -> ()){
+        let queryItemsGroup = [
+            URLQueryItem(name: "access_token", value: Storage.share.token),
+            URLQueryItem(name: "v", value: "5.81")]
+        UniversalMetod().loadJson(path: "/method/groups.get", queryItems: queryItemsGroup)
+        guard let data = Storage.share.datafile else {return}
 
+        do {
+            let result = try self.jsonDecoder.decode(Group.self, from: data )
+                completion(.success(result))
+        } catch {
+                completion(.failure(.parseError))
+        }
+    }
+}
 
+private extension GroupController {
+    func fetchGroups() {
+        loadGroups { [weak self] groups in
+            guard let self = self else { return }
+            do {
+                let arrayGroup = try groups.get().response.items
+                    self.groups = arrayGroup
+            }
+            catch { }
+            DispatchQueue.main.async {
+                self.tableViewMyGroups.reloadData()
+            }
+        }
+    }
 }

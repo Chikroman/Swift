@@ -12,9 +12,7 @@ class Storage: NSObject {
     private override init() {
         super.init()
     }
-    var allGroups = [Group]()
-    var myGroups = [Group]()
-    var myFriends = [Friend]()
     var token: String = ""
     var userId: Int = 0
+    var datafile: Data? = Data()
 }

@@ -39,17 +39,11 @@ class UniversalTableViewCell: UITableViewCell {
         nameLableView.text = name
         descriptoinLableView.text = description
     }
-    func configurate(friend: Friend, completion: @escaping()->Void){
-        self.completion = completion
-        mainImageView.image = UIImage(named: friend.avatar)
-        nameLableView.text = friend.name
-        descriptoinLableView.text = ""
-    }
-    func configurate(group: Group){
-        mainImageView.image = UIImage(named: group.avatar)
-        nameLableView.text = group.name
-        descriptoinLableView.text = group.description
-    }
+//    func configurate(group: Group){
+//        mainImageView.image = UIImage(named: group.avatar)
+//        nameLableView.text = group.name
+//        descriptoinLableView.text = group.description
+//    }
     
     @IBAction func pressAnimationButton(_ sender: Any) {
         UIView.animate(withDuration: 3) {[weak self] in

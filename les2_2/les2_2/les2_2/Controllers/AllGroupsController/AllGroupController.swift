@@ -15,7 +15,7 @@ class AllGroupController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allGroupTableVew.dataSource = self
+//        allGroupTableVew.dataSource = self
         allGroupTableVew.delegate = self
         allGroupTableVew.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
     }

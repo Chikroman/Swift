@@ -11,14 +11,14 @@ extension FriendsListController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return heightForCellTableView
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == fromMyFriendToGallery,
-           let destinationController = segue.destination as? GalleryController,
-           let friend = sender as? Friend {
-            destinationController.fotoArray = friend.fotos
-            
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == fromMyFriendToGallery,
+//           let destinationController = segue.destination as? GalleryController,
+//           let friend = sender as? Friend {
+//            destinationController.fotoArray = friend.fotos
+//            
+//        }
+//    }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print (friends[indexPath.row])
