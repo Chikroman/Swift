@@ -11,6 +11,7 @@
 		1F64645627C67D3E0018244E /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F64645527C67D3E0018244E /* ImageLoader.swift */; };
 		1F64645927CD10700018244E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 1F64645827CD10700018244E /* Realm */; };
 		1F64645B27CD10700018244E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1F64645A27CD10700018244E /* RealmSwift */; };
+		1F64645E27D610DD0018244E /* RealmCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F64645D27D610DD0018244E /* RealmCacheService.swift */; };
 		1F6D529627903FB9008CDE4F /* FriendsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D529527903FB9008CDE4F /* FriendsListController.swift */; };
 		1F6D52982790412A008CDE4F /* FriendListController+TableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D52972790412A008CDE4F /* FriendListController+TableDataSource.swift */; };
 		1F6D529C2790419B008CDE4F /* UniversalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D529A2790419B008CDE4F /* UniversalTableViewCell.swift */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		1F64645327C6727B0018244E /* UniversalMetod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalMetod.swift; sourceTree = "<group>"; };
 		1F64645527C67D3E0018244E /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		1F64645D27D610DD0018244E /* RealmCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCacheService.swift; sourceTree = "<group>"; };
 		1F6D529527903FB9008CDE4F /* FriendsListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListController.swift; sourceTree = "<group>"; };
 		1F6D52972790412A008CDE4F /* FriendListController+TableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendListController+TableDataSource.swift"; sourceTree = "<group>"; };
 		1F6D529A2790419B008CDE4F /* UniversalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalTableViewCell.swift; sourceTree = "<group>"; };
@@ -132,6 +134,14 @@
 				1F6D52AE279079DD008CDE4F /* Storage.swift */,
 			);
 			path = Singleton;
+			sourceTree = "<group>";
+		};
+		1F64645C27D610B00018244E /* RealmService */ = {
+			isa = PBXGroup;
+			children = (
+				1F64645D27D610DD0018244E /* RealmCacheService.swift */,
+			);
+			path = RealmService;
 			sourceTree = "<group>";
 		};
 		1F6D529227903E6D008CDE4F /* LoginViewController */ = {
@@ -261,6 +271,7 @@
 		1FB8EF1F2779D294006478AE /* les2_2 */ = {
 			isa = PBXGroup;
 			children = (
+				1F64645C27D610B00018244E /* RealmService */,
 				1F6D52A927907959008CDE4F /* Model */,
 				1F6D52992790417D008CDE4F /* Cell */,
 				1F6D529327903EF3008CDE4F /* Controllers */,
@@ -437,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F64645E27D610DD0018244E /* RealmCacheService.swift in Sources */,
 				1FB8EF252779D294006478AE /* ViewController.swift in Sources */,
 				1F6D52B427907E09008CDE4F /* AllGroupsController+TableSourse.swift in Sources */,
 				1F6D52AF279079DD008CDE4F /* Storage.swift in Sources */,

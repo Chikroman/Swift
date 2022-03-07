@@ -20,7 +20,7 @@ class FriendsListController: UIViewController {
     var friends = [Friends]()
     let reuseIdentifierUniversalTableViewCell = "reuseIdentifierUniversalTableViewCell"
     let fromMyFriendToGallery = "fromMyFriendToGallery"
-
+    let realmCacheServise = RealmCacheService()
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -30,6 +30,7 @@ class FriendsListController: UIViewController {
 //            searchBar.delegate = self
 //            friends = sourceFriends
             fetchFriends()
+            loadFriendsFromRealm()
         }
     
     func loadFriends(completion: @escaping(Result<Friend, ServiceError>) -> ()){
@@ -57,7 +58,10 @@ private extension FriendsListController {
             guard let self = self else { return }
             do {
                 let arrayFriend = try friends.get().response.items
-                self.friends = arrayFriend
+                DispatchQueue.main.async {
+                    self.realmCacheServise.create(objects: arrayFriend)
+                }
+               // self.friends = arrayFriend
             }
             catch { }
             DispatchQueue.main.async {
@@ -66,6 +70,13 @@ private extension FriendsListController {
         }
     }
 
+    func loadFriendsFromRealm() {
+        DispatchQueue.main.async {
+            let myFriends = self.realmCacheServise.read(object: Friends.self)
+            myFriends.forEach { self.friends.append($0) }
+            self.tableViewMyFriends.reloadData()
+        }
+    }
 
 }
 

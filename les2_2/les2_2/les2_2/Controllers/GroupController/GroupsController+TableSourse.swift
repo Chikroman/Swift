@@ -6,11 +6,9 @@
 //
 
 import UIKit
+
 extension GroupController: UITableViewDataSource {
-
     
-    
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groups.count
     }
@@ -22,4 +20,6 @@ extension GroupController: UITableViewDataSource {
         cell.nameLableView.text = name        
         return cell
     }
+    
+
 }

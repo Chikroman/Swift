@@ -9,7 +9,8 @@ import UIKit
 
 class GroupController: UIViewController {
     var groups: [Groups] = []
-   
+    
+    let realmCacheServise = RealmCacheService()
 
     @IBOutlet weak var tableViewMyGroups: UITableView!
     
@@ -27,6 +28,7 @@ class GroupController: UIViewController {
         tableViewMyGroups.delegate = self
         tableViewMyGroups.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
         fetchGroups()
+        loadGruopsFromRealm()
     }
     private let jsonDecoder = JSONDecoder()
     
@@ -47,17 +49,29 @@ class GroupController: UIViewController {
 }
 
 private extension GroupController {
+    
     func fetchGroups() {
         loadGroups { [weak self] groups in
             guard let self = self else { return }
             do {
                 let arrayGroup = try groups.get().response.items
-                    self.groups = arrayGroup
+                DispatchQueue.main.async {
+                    self.realmCacheServise.create(objects: arrayGroup)
+                }
+                
+                    //self.groups = arrayGroup
             }
             catch { }
             DispatchQueue.main.async {
                 self.tableViewMyGroups.reloadData()
             }
+        }
+    }
+    func loadGruopsFromRealm() {
+        DispatchQueue.main.async {
+            let mygroups = self.realmCacheServise.read(object: Groups.self)
+            mygroups.forEach { self.groups.append($0) }
+            self.tableViewMyGroups.reloadData()
         }
     }
 }
