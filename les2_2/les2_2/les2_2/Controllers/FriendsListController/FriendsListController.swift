@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 enum ServiceError: Error {
     case parseError
     case serverError
@@ -16,8 +17,12 @@ class FriendsListController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-
-    var friends = [Friends]()
+    private var token: NotificationToken?
+    
+    var friends: Results<Friends>? {
+        realmCacheServise.read(object: Friends.self)
+    }
+    
     let reuseIdentifierUniversalTableViewCell = "reuseIdentifierUniversalTableViewCell"
     let fromMyFriendToGallery = "fromMyFriendToGallery"
     let realmCacheServise = RealmCacheService()
@@ -30,7 +35,7 @@ class FriendsListController: UIViewController {
 //            searchBar.delegate = self
 //            friends = sourceFriends
             fetchFriends()
-            loadFriendsFromRealm()
+            self.createNotificationToken()
         }
     
     func loadFriends(completion: @escaping(Result<Friend, ServiceError>) -> ()){
@@ -59,7 +64,8 @@ private extension FriendsListController {
             do {
                 let arrayFriend = try friends.get().response.items
                 DispatchQueue.main.async {
-                    self.realmCacheServise.create(objects: arrayFriend)
+                    self.saveFrendsInrealm(newFrends: arrayFriend)
+                   // self.realmCacheServise.create(objects: arrayFriend)
                 }
                // self.friends = arrayFriend
             }
@@ -70,11 +76,42 @@ private extension FriendsListController {
         }
     }
 
-    func loadFriendsFromRealm() {
-        DispatchQueue.main.async {
-            let myFriends = self.realmCacheServise.read(object: Friends.self)
-            myFriends.forEach { self.friends.append($0) }
-            self.tableViewMyFriends.reloadData()
+    func createNotificationToken() {
+        token = friends?.observe { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .initial(let groupsData):
+                print("\(groupsData.count)")
+            case .update(_ ,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                let deletionIndexPath = deletions.map { IndexPath(row: $0, section: 0) }
+                let insertionsIndexPath = insertions.map { IndexPath(row: $0, section: 0) }
+                let modificationsIndexPath = modifications.map { IndexPath(row: $0, section: 0) }
+                DispatchQueue.main.async {
+                    self.tableViewMyFriends.beginUpdates()
+                    self.tableViewMyFriends.deleteRows(at: deletionIndexPath, with: .automatic)
+                    self.tableViewMyFriends.insertRows(at: insertionsIndexPath, with: .automatic)
+                    self.tableViewMyFriends.reloadRows(at: modificationsIndexPath, with: .automatic)
+                    self.tableViewMyFriends.endUpdates()
+                }
+            case .error(let error):
+                print("\(error)")
+            }
+        }
+    }
+    
+    func saveFrendsInrealm(newFrends: [Friends]) {
+        do {
+            let realm = try Realm()
+            let oldValues = realm.objects(Groups.self)
+            realm.beginWrite()
+            realm.delete(oldValues)
+            realm.add(newFrends)
+            try realm.commitWrite()
+        } catch {
+            print("error \(error)")
         }
     }
 

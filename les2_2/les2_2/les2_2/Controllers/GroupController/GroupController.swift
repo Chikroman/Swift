@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupController: UIViewController {
-    var groups: [Groups] = []
+    
+    var groups: Results<Groups>? {
+        realmCacheServise.read(object: Groups.self)
+    }
     
     let realmCacheServise = RealmCacheService()
-
+    
+    private var token: NotificationToken?
+    
+    
     @IBOutlet weak var tableViewMyGroups: UITableView!
     
     let reuseIdentifierUniversalTableViewCell = "reuseIdentifierUniversalTableViewCell"
@@ -28,7 +35,8 @@ class GroupController: UIViewController {
         tableViewMyGroups.delegate = self
         tableViewMyGroups.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
         fetchGroups()
-        loadGruopsFromRealm()
+        createNotificationToken()
+ //       loadGruopsFromRealm()
     }
     private let jsonDecoder = JSONDecoder()
     
@@ -56,7 +64,9 @@ private extension GroupController {
             do {
                 let arrayGroup = try groups.get().response.items
                 DispatchQueue.main.async {
-                    self.realmCacheServise.create(objects: arrayGroup)
+                    self.saveGroupsInrealm(newGroups: arrayGroup)
+                 //   self.realmCacheServise.create(objects: arrayGroup)
+                    
                 }
                 
                     //self.groups = arrayGroup
@@ -67,11 +77,50 @@ private extension GroupController {
             }
         }
     }
-    func loadGruopsFromRealm() {
-        DispatchQueue.main.async {
-            let mygroups = self.realmCacheServise.read(object: Groups.self)
-            mygroups.forEach { self.groups.append($0) }
-            self.tableViewMyGroups.reloadData()
+//    func loadGruopsFromRealm() {
+//        DispatchQueue.main.async {
+//            private let mygroups = self.realmCacheServise.read(object: Groups.self)
+//            mygroups.forEach { self.groups.append($0) }
+//            self.tableViewMyGroups.reloadData()
+//        }
+//    }
+    func createNotificationToken() {
+        token = groups?.observe { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .initial(let groupsData):
+                print("\(groupsData.count)")
+            case .update(_ ,
+                         deletions: let deletions,
+                         insertions: let insertions,
+                         modifications: let modifications):
+                let deletionIndexPath = deletions.map { IndexPath(row: $0, section: 0) }
+                let insertionsIndexPath = insertions.map { IndexPath(row: $0, section: 0) }
+                let modificationsIndexPath = modifications.map { IndexPath(row: $0, section: 0) }
+                DispatchQueue.main.async {
+                    self.tableViewMyGroups.beginUpdates()
+                    self.tableViewMyGroups.deleteRows(at: deletionIndexPath, with: .automatic)
+                    self.tableViewMyGroups.insertRows(at: insertionsIndexPath, with: .automatic)
+                    self.tableViewMyGroups.reloadRows(at: modificationsIndexPath, with: .automatic)
+                    self.tableViewMyGroups.endUpdates()
+                }
+            case .error(let error):
+                print("\(error)")
+            }
         }
     }
+    
+    func saveGroupsInrealm(newGroups: [Groups]) {
+        do {
+            let realm = try Realm()
+            let oldValues = realm.objects(Groups.self)
+            realm.beginWrite()
+            realm.delete(oldValues)
+            realm.add(newGroups)
+            try realm.commitWrite()
+        } catch {
+            print("error \(error)")
+        }
+    }
+    
 }

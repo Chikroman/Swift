@@ -11,7 +11,11 @@ extension FriendsListController: UITableViewDataSource {
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        if let myFrends = friends {
+            return myFrends.count
+        } else {
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
