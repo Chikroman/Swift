@@ -105,7 +105,7 @@ private extension FriendsListController {
     func saveFrendsInrealm(newFrends: [Friends]) {
         do {
             let realm = try Realm()
-            let oldValues = realm.objects(Groups.self)
+            let oldValues = realm.objects(Friends.self)
             realm.beginWrite()
             realm.delete(oldValues)
             realm.add(newFrends)

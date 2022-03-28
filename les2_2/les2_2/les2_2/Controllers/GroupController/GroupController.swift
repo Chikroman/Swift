@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 class GroupController: UIViewController {
     
@@ -17,7 +18,8 @@ class GroupController: UIViewController {
     let realmCacheServise = RealmCacheService()
     
     private var token: NotificationToken?
-    
+    private let fireBaseServise = [FirebaseGroups]()
+    private let ref = Database.database().reference(withPath: "Groups")
     
     @IBOutlet weak var tableViewMyGroups: UITableView!
     
@@ -26,6 +28,17 @@ class GroupController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableViewMyGroups.reloadData()
+        
+        ref.observe(.value) { snapshot in
+            var groups: [FirebaseGroups] = []
+            for child in snapshot.children {
+                if let snapshot = child as? DataSnapshot,
+                   let group = FirebaseGroups(snapshot: snapshot) {
+                    groups.append(group)
+                }
+            }
+            groups.forEach {print($0.groupName)}
+        }
     }
     
     
@@ -63,6 +76,12 @@ private extension GroupController {
             guard let self = self else { return }
             do {
                 let arrayGroup = try groups.get().response.items
+                arrayGroup.forEach { group in
+                    let firebaseGroup = FirebaseGroups (groupName: group.name, groupId: group.id)
+                    let groupsRef = self.ref.child(group.name.lowercased())
+                    groupsRef.setValue(firebaseGroup.toAnyObject)
+                }
+                
                 DispatchQueue.main.async {
                     self.saveGroupsInrealm(newGroups: arrayGroup)
                  //   self.realmCacheServise.create(objects: arrayGroup)
