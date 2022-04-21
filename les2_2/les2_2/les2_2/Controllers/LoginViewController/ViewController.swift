@@ -35,9 +35,9 @@ private extension ViewController {
             URLQueryItem(name: "client_id", value: "8081436"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "offline, friends, photos, groups"),
-            URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "revoke", value: "0")
+            URLQueryItem(name: "scope", value: "offline, friends, photos, groups, wall"),
+            URLQueryItem(name: "response_type", value: "token")//,
+           // URLQueryItem(name: "revoke", value: "0")
         ]
         
         let request = URLRequest(url: urlComponents.url!)
