@@ -57,6 +57,54 @@ class FriendsListController: UIViewController {
     }
 }
 
+class FriendAPiOperation: Operation {
+    
+    override func main() {
+        let queryItemsFrends = [
+            URLQueryItem(name: "access_token", value: Storage.share.token),
+            URLQueryItem(name: "fields", value: "photo_50"),
+            URLQueryItem(name: "v", value: "5.81")]
+        UniversalMetod().loadJson(path: "/method/friends.get", queryItems: queryItemsFrends)
+
+    }
+}
+class FriendParsing: Operation {
+    var friendList: [Friends] = []
+    
+    override func main() {
+        do {
+            let jsonDecoder = JSONDecoder()
+            let result = try jsonDecoder.decode(Friend.self, from: Storage.share.datafile!)
+            friendList.self = result.response.items
+        } catch {
+            
+        }
+
+    }
+    
+}
+
+class FriendDisplay: Operation {
+    var friendViewController: FriendsListController
+    override func main() {
+        do {
+            guard let parsetFrienfList = dependencies.first as? FriendParsing,
+                  let friendList = parsetFrienfList.friendList as? [Friends] else {return}
+            DispatchQueue.main.async { [self] in
+                self.friendViewController.saveFrendsInrealm(newFrends: friendList)
+            }
+        }
+        catch { }
+        DispatchQueue.main.async { [self] in
+            self.friendViewController.tableViewMyFriends.reloadData()
+        }
+    }
+    init(controller: FriendsListController) {
+        self.friendViewController = controller
+    }
+    
+}
+
 private extension FriendsListController {
     func fetchFriends() {
         loadFriends { [weak self] friends in
