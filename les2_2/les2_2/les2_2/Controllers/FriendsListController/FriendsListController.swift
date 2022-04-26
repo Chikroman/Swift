@@ -29,6 +29,16 @@ class FriendsListController: UIViewController {
     
         override func viewDidLoad() {
             super.viewDidLoad()
+            let operationQueue = OperationQueue()
+            let friendAPiOperation = FriendAPiOperation()
+            let friendParsing = FriendParsing()
+            let friendDisplay = FriendDisplay(controller: self)
+            operationQueue.addOperation(friendAPiOperation)
+            friendParsing.addDependency(friendAPiOperation)
+            operationQueue.addOperation(friendParsing)
+            friendDisplay.addDependency(friendParsing)
+            OperationQueue.main.addOperation(friendDisplay)
+            
             tableViewMyFriends.dataSource = self
             tableViewMyFriends.delegate = self
             tableViewMyFriends.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
@@ -104,6 +114,7 @@ class FriendDisplay: Operation {
     }
     
 }
+
 
 private extension FriendsListController {
     func fetchFriends() {
