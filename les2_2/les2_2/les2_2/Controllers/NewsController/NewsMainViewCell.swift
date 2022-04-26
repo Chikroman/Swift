@@ -19,16 +19,7 @@ class NewsMainViewCell: UITableViewCell {
     
     var collection: [CollectionCellModel] = []
     
-    func configure(with model: NewsCellModel) {
-        avatar.image = model.nameFriend.uiImage
-        name.text = model.nameFriend.name
-        self.postData.text = model.postDate
-        textNews.text = model.postText
-        updateCellWith(collection: model.collection)
-        colletcionPhoto.dataSource = self
-        colletcionPhoto.delegate = self
-
-    }
+ 
 }
 
 // MARK: Collection view extension

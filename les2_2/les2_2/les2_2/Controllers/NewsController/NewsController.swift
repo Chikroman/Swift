@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewsController: UITableViewController {
-    let news = NewsArray.iNeedNews()
-    
+    let news: [News] = []
 
     @IBOutlet weak var tableViewNews: UITableView!
     override func viewDidLoad() {
@@ -34,8 +34,6 @@ class NewsController: UITableViewController {
         guard let cell = tableViewNews.dequeueReusableCell(withIdentifier: "NewsCellMain", for: indexPath) as? NewsMainViewCell else {
             return UITableViewCell()
         }
-        
-        cell.configure(with: news[indexPath.section])
         return cell
     }
     
@@ -49,23 +47,40 @@ class NewsController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         5.0
     }
+    
+    func loadNews(completion: @escaping(Result<Friend, ServiceError>) -> ()){
+        let queryItemsNews = [
+            URLQueryItem(name: "access_token", value: Storage.share.token),
+            URLQueryItem(name: "filters", value: "post"),
+            URLQueryItem(name: "count", value: "20"),
+            URLQueryItem(name: "v", value: "5.81")]
+        UniversalMetod().loadJson(path: "/method/newsfeed.get", queryItems: queryItemsNews)
+            let jsonDecoder = JSONDecoder()
 
-}
-
-class NewsArray {
-    static func iNeedNews() -> [NewsCellModel] {
-        return [NewsCellModel(nameFriend: FriendModel(name: "Дес",
-                                                              image: "Des1",
-                                                              friendsPhoto: []),
-                                      postDate: "23.10.2021",
-                                      postText: "Всем привет)))",
-                                      newsImageNames: ["Des1", "Des2"]),
-                NewsCellModel(nameFriend: FriendModel(name: "Сидр",
-                                                                      image: "Sidor1",
-                                                                      friendsPhoto: []),
-                                              postDate: "24.10.2021",
-                                              postText: "Сидим учим)))",
-                                              newsImageNames: ["Sidor1", "Sidor2"])]
-                }
+            do {
+                let result = try jsonDecoder.decode(Friend.self, from: Storage.share.datafile as! Data)
                 
+                return completion(.success(result))
+            } catch {
+                completion(.failure(.parseError))
+            }
+
+    }
+
 }
+
+private extension NewsController {
+    func fetchNewsFriends() {
+        loadNews { [weak self] news in
+            guard let self = self else { return }
+            do {
+                let arrayNews = try news.get().response.items
+            }
+            catch { }
+            DispatchQueue.main.async {
+                self.tableViewNews.reloadData()
+            }
+        }
+    }
+}
+
