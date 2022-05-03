@@ -8,6 +8,8 @@
 import UIKit
 import RealmSwift
 import Firebase
+import PromiseKit
+
 
 class GroupController: UIViewController {
     
@@ -47,54 +49,59 @@ class GroupController: UIViewController {
         tableViewMyGroups.dataSource = self
         tableViewMyGroups.delegate = self
         tableViewMyGroups.register(UINib(nibName: "UniversalTableViewCell", bundle: nil), forCellReuseIdentifier: reuseIdentifierUniversalTableViewCell)
-        fetchGroups()
+        firstly {
+            self.loadGroups()
+        }.then { groups in
+            self.fetchGroups()
+        }.ensure {
+        }.catch { error in
+            print(error)
+        }
         createNotificationToken()
  //       loadGruopsFromRealm()
     }
     private let jsonDecoder = JSONDecoder()
     
-    func loadGroups(completion: @escaping(Result<Group, ServiceError>) -> ()){
-        let queryItemsGroup = [
-            URLQueryItem(name: "access_token", value: Storage.share.token),
-            URLQueryItem(name: "v", value: "5.81")]
-        UniversalMetod().loadJson(path: "/method/groups.get", queryItems: queryItemsGroup)
-        guard let data = Storage.share.datafile else {return}
+    func loadGroups() -> Promise<Group>{
+        return Promise { seal in
+            let queryItemsGroup = [
+                URLQueryItem(name: "access_token", value: Storage.share.token),
+                URLQueryItem(name: "v", value: "5.81")]
+            UniversalMetod().loadJson(path: "/method/groups.get", queryItems: queryItemsGroup)
+            guard let data = Storage.share.datafile else {return}
 
-        do {
-            let result = try self.jsonDecoder.decode(Group.self, from: data )
-                completion(.success(result))
-        } catch {
-                completion(.failure(.parseError))
+            do {
+                
+                let result = try self.jsonDecoder.decode(Group.self, from: data )
+                    seal.fulfill(result)
+            }
+            
         }
+        
     }
 }
 
 private extension GroupController {
     
-    func fetchGroups() {
-        loadGroups { [weak self] groups in
-            guard let self = self else { return }
-            do {
-                let arrayGroup = try groups.get().response.items
-                arrayGroup.forEach { group in
-                    let firebaseGroup = FirebaseGroups (groupName: group.name, groupId: group.id)
-                    let groupsRef = self.ref.child(group.name.lowercased())
-                    groupsRef.setValue(firebaseGroup.toAnyObject)
-                }
+    func fetchGroups() -> Promise<Void> {
+        return Promise { seal in
+           // loadGroups { [weak self] groups in
+           //     guard let self = self else { return }
+                do {
+                    let arrayGroup = groups
+                    arrayGroup?.forEach { group in
+                        let firebaseGroup = FirebaseGroups (groupName: group.name, groupId: group.id)
+                        let groupsRef = self.ref.child(group.name.lowercased())
+                        groupsRef.setValue(firebaseGroup.toAnyObject)
+                    }
                 
                 DispatchQueue.main.async {
-                    self.saveGroupsInrealm(newGroups: arrayGroup)
-                 //   self.realmCacheServise.create(objects: arrayGroup)
-                    
+                    self.tableViewMyGroups.reloadData()
                 }
-                
-                    //self.groups = arrayGroup
             }
-            catch { }
-            DispatchQueue.main.async {
-                self.tableViewMyGroups.reloadData()
-            }
+            seal.fulfill(())
         }
+        
     }
 //    func loadGruopsFromRealm() {
 //        DispatchQueue.main.async {
