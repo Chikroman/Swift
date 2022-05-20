@@ -19,15 +19,22 @@ extension GroupController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierUniversalTableViewCell, for: indexPath) as? UniversalTableViewCell else {return UITableViewCell()}
-        if let mygroups = groups {
-            let section = mygroups[indexPath.section]
-                let name = section.name
-                cell.nameLableView.text = name
-        }
- 
-
+        let section = getCellDateText(forIndexPath: indexPath)
+        let name = section.name
+        cell.nameLableView.text = name
         return cell
     }
     
-
+    func getCellDateText(forIndexPath indexPath: IndexPath) -> Groups {
+        if let section = dateTextCache[indexPath] {
+            return section
+        } else {
+            if let mygroups = groups {
+                let section = mygroups[indexPath.section]
+                dateTextCache[indexPath] = section
+                return section
+            }
+        }
+        return Groups()
+    }
 }

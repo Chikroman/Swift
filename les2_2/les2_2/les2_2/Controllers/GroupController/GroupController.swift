@@ -16,7 +16,7 @@ class GroupController: UIViewController {
     var groups: Results<Groups>? {
         realmCacheServise.read(object: Groups.self)
     }
-    
+    var dateTextCache: [IndexPath: Groups] = [:]
     let realmCacheServise = RealmCacheService()
     
     private var token: NotificationToken?
