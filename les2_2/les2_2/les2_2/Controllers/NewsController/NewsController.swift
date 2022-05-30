@@ -7,7 +7,7 @@
 
 import UIKit
 import RealmSwift
-
+//Не успел сделать постараюсь к следующей домашки доделать
 class NewsController: UITableViewController {
     let news: [News] = []
 
