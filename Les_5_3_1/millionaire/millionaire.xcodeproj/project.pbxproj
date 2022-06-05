@@ -18,8 +18,11 @@
 		1F355F632843C0F300D5A524 /* millionaireTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F355F622843C0F300D5A524 /* millionaireTests.swift */; };
 		1F355F6D2843C0F300D5A524 /* millionaireUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F355F6C2843C0F300D5A524 /* millionaireUITests.swift */; };
 		1F355F6F2843C0F300D5A524 /* millionaireUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F355F6E2843C0F300D5A524 /* millionaireUITestsLaunchTests.swift */; };
+		1FA2C8AE284CD83800F1D881 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA2C8AD284CD83800F1D881 /* GameSetting.swift */; };
+		1FA2C8B0284CDEEB00F1D881 /* NumberQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA2C8AF284CDEEB00F1D881 /* NumberQuestions.swift */; };
 		1FD5E84728452A1900C7C71A /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD5E84628452A1900C7C71A /* Questions.swift */; };
 		1FD5E84928452CA800C7C71A /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD5E84828452CA800C7C71A /* Singleton.swift */; };
+		1FD5E84B284CC92A00C7C71A /* GameStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD5E84A284CC92A00C7C71A /* GameStrategy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,8 +58,11 @@
 		1F355F682843C0F300D5A524 /* millionaireUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = millionaireUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F355F6C2843C0F300D5A524 /* millionaireUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = millionaireUITests.swift; sourceTree = "<group>"; };
 		1F355F6E2843C0F300D5A524 /* millionaireUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = millionaireUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1FA2C8AD284CD83800F1D881 /* GameSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		1FA2C8AF284CDEEB00F1D881 /* NumberQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberQuestions.swift; sourceTree = "<group>"; };
 		1FD5E84628452A1900C7C71A /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 		1FD5E84828452CA800C7C71A /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		1FD5E84A284CC92A00C7C71A /* GameStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStrategy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,7 @@
 				1F355F4F2843C0F100D5A524 /* ViewController.swift */,
 				1F208C952843D23B000F1FA7 /* RecordsViewController.swift */,
 				1F208C932843CEC8000F1FA7 /* GameController.swift */,
+				1FA2C8AD284CD83800F1D881 /* GameSetting.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -118,7 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				1F355F4B2843C0F100D5A524 /* AppDelegate.swift */,
+				1FD5E84A284CC92A00C7C71A /* GameStrategy.swift */,
 				1F355F4D2843C0F100D5A524 /* SceneDelegate.swift */,
+				1FA2C8AF284CDEEB00F1D881 /* NumberQuestions.swift */,
 				1F208C922843CEA3000F1FA7 /* Controllers */,
 				1F355F512843C0F100D5A524 /* Main.storyboard */,
 				1F355F542843C0F300D5A524 /* Assets.xcassets */,
@@ -215,6 +224,7 @@
 				TargetAttributes = {
 					1F355F472843C0F100D5A524 = {
 						CreatedOnToolsVersion = 13.3.1;
+						LastSwiftMigration = 1340;
 					};
 					1F355F5D2843C0F300D5A524 = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -280,6 +290,9 @@
 			files = (
 				1F355F502843C0F100D5A524 /* ViewController.swift in Sources */,
 				1FD5E84928452CA800C7C71A /* Singleton.swift in Sources */,
+				1FA2C8B0284CDEEB00F1D881 /* NumberQuestions.swift in Sources */,
+				1FD5E84B284CC92A00C7C71A /* GameStrategy.swift in Sources */,
+				1FA2C8AE284CD83800F1D881 /* GameSetting.swift in Sources */,
 				1F208C942843CEC8000F1FA7 /* GameController.swift in Sources */,
 				1F355F4C2843C0F100D5A524 /* AppDelegate.swift in Sources */,
 				1FD5E84728452A1900C7C71A /* Questions.swift in Sources */,
@@ -459,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -476,6 +490,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Rom.millionaire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "millionaire/Controllers/millionaire-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -486,6 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -503,6 +520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Rom.millionaire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "millionaire/Controllers/millionaire-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

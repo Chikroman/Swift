@@ -14,5 +14,6 @@ class SingletonQuestions: NSObject {
     }
     var QuestionsArray: [Questions] = []
     var numberQuestion: Int = 1
+    var Settings: Strategy = .successively
 
 }

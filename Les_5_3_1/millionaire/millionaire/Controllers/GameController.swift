@@ -26,6 +26,16 @@ class GameController: UIViewController {
     
     @IBOutlet weak var answerDLabel: UILabel!
     
+    @IBOutlet weak var numberQuestinLabel: UILabel!
+   
+    @IBOutlet weak var percentCompleteLabel: UILabel!
+    
+    let observer = Observer()
+
+    let numberQuestion = NumberQuestions(numberQuestion: SingletonQuestions.share.numberQuestion)
+
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +44,13 @@ class GameController: UIViewController {
     }
     
     func initQuestions() {
+        // MARK: не смог разобраться в ошибке приложение падает при начале игры
+        numberQuestion.numberQuestion.addObserver(observer, options: [.initial, .new, .old]) { [weak self] numberQuestion, change  in
+            self?.numberQuestinLabel.text = "Вопрос № "+String(numberQuestion)
+            let count = SingletonQuestions.share.QuestionsArray.count
+            self?.percentCompleteLabel.text = "Выполнено " + String(numberQuestion/count*100)
+        }
+        
         var question = Questions(textQuestions: "Что растёт в огороде?",
                                  answerA: "Лук",
                                  answerB: "Пистолет",
@@ -76,7 +93,15 @@ class GameController: UIViewController {
     }
     func nextQuestions() {
         var question = Questions()
-        question = SingletonQuestions.share.QuestionsArray[SingletonQuestions.share.numberQuestion-1]
+        if SingletonQuestions.share.Settings == .successively {
+            question = SingletonQuestions.share.QuestionsArray[SingletonQuestions.share.numberQuestion-1]
+
+        }else {
+            var numberQuestion = 0
+            numberQuestion = Int.random(in: 1...SingletonQuestions.share.QuestionsArray.count)
+            question = SingletonQuestions.share.QuestionsArray[numberQuestion-1]
+
+        }
         questionLabel.text = question.textQuestions
         answerALabel.text = "A:" + question.answerA
         answerBLabel.text = "B:" + question.answerB
@@ -85,5 +110,16 @@ class GameController: UIViewController {
     }
     
 }
+
+class NumberQuestions {
+    let numberQuestion: Observable<Int>
+    
+    public init(numberQuestion: Int) {
+        self.numberQuestion = Observable(numberQuestion)
+    }
+}
+
+class Observer {}
+
 
 

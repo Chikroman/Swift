@@ -8,8 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var SettingsButton: UIButton!
+    
     @IBOutlet weak var StartButton: UIButton!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -20,7 +23,10 @@ class ViewController: UIViewController {
             guard segue.destination is GameController else {
                 return
             }
-            
+        case "gameSettingsSegue":
+            guard segue.destination is GameSetting else {
+                return
+            }
         default:
             break
         }
